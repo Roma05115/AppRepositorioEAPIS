@@ -1,0 +1,57 @@
+﻿@model List<AppRepositorioEAPIS.ViewModels.PracticasViewModels>
+@{
+}
+<style>
+    /*quitar en header y el footer*/
+    .navbar, .footer {
+        display: none;
+    }
+
+    /* Ajustes para el logo */
+    .logo {
+        width: 100px;
+        height: auto;
+    }
+
+    /* Ajustar el progreso */
+    .progress-bar {
+        width: 50px;
+        height: 10px;
+    }
+</style>
+
+<h1>Practicas</h1>
+
+@Html.Partial("_BarraAdministrador")
+
+<table class="table table-bordered table-hover table-striped">
+    <thead class="bg-primary text-white">
+        <tr>
+            <th>Nombre</th>
+            <th>Estudiante</th>
+            <th>Especialidad</th>
+            <th>Empresa</th>
+            <th>Estado</th>
+            <th>Progreso</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NombrePractica</td>
+                <td>@item.NombreEstudiante</td>
+                <td>@item.Especialidad</td>
+                <td>@item.NombreEmpresa</td>
+                <td>@item.Estado</td>
+                <td>
+                    <div class="progress" style="height: 10px;">
+                        <div class="progress-bar" role="progressbar" style="width:@item.Progreso%;background-color:@(item.Progreso == 100 ? "green" : item.Progreso > 50 ? "blue" : "red");" aria-valuenow="@item.Progreso" aria-valuemin="0" aria-valuemax="100">
+                            @item.Progreso%
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

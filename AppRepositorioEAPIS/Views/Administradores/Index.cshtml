@@ -1,0 +1,94 @@
+﻿@model AppRepositorioEAPIS.ViewModels.IndexViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@Html.Partial("_BarraAdministrador")
+
+<h1>Administrar Prácticas</h1>
+
+<form method="get" asp-action="Index" class="d-flex align-items-center" id="searchForm">
+    <label for="campoBuscar">Filtro:&nbsp;</label>
+    <div class="form-group me-3">
+        <select name="campoBuscar" id="campoBuscar" class="form-control">
+            <option value="">Seleccione...</option> <!-- Opción vacía para restablecer -->
+            <option value="Estudiante">Estudiante</option>
+            <option value="Docente">Docente</option>
+            <option value="Especialidad">Especialidad</option>
+            <option value="Practica">Nombre de práctica</option>
+        </select>
+    </div>
+    <div class="form-group input-group me-3">
+        <input type="text" name="buscar" value="" class="form-control" placeholder="Ingrese su búsqueda" />
+        <button type="submit" class="btn btn-outline-primary">Buscar</button>
+        <a asp-action="Index" class="btn btn-outline-dark">
+            <i class="fa-solid fa-rotate-left"></i>&nbsp;Restablecer
+        </a>
+    </div>
+</form>
+
+<a asp-action="Create" class="btn btn-success mt-4">
+    <i class="fa-solid fa-plus"></i>&nbsp;Nueva Práctica
+</a>
+
+<a asp-action="Imprimir" class="btn btn-warning mt-4">
+    <i class="fa-solid fa-print"></i>&nbsp; Imprimir Prácticas
+</a>
+
+<table class="table table-bordered table-hover table-striped mt-4">
+    <thead class="bg-primary text-white">
+        <tr>
+            <th>Nombre</th>
+            <th>Estudiante</th>
+            <th>Docente</th>
+            <th>Especialidad</th>
+            <th>Empresa</th>
+            <th>Estado</th>
+            <th>Progreso</th>
+            <th>
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Practicas)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>@item.estudiante.Nombres</td>
+                <td>@item.docente.Nombres</td>
+                <td>@item.Especialidad</td>
+                <td>@item.empresa.Nombre</td>
+                <td>@item.Estado</td>
+                <td>
+                    <div class="progress" style="height: 10px;">
+                        <div class="progress-bar" role="progressbar" style="width:@item.Progreso%;background-color:@(item.Progreso == 100 ? "green" : item.Progreso > 50 ? "blue" : "red");" aria-valuenow="@item.Progreso" aria-valuemin="0" aria-valuemax="100">
+                            @item.Progreso%
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.PracticaID" class="btn btn-dark btn-sm">
+                        <i class="fa-solid fa-circle-info"></i>&nbsp;Detalles
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.PracticaID" class="btn btn-danger btn-sm">
+                        <i class="fa-solid fa-trash"></i>&nbsp;Borrar
+                    </a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.TotalRegistros; i++)
+        {
+            <li class="page-item @(i == Model.PaginaActual ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-pagina="@i">@i</a>
+            </li>
+        }
+    </ul>
+</nav>

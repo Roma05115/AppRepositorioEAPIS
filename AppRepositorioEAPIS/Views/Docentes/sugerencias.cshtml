@@ -1,0 +1,48 @@
+﻿@model AppRepositorioEAPIS.Models.Practica
+
+
+@{
+    ViewData["Title"] = "Agregar Sugerencias";
+}
+
+@Html.Partial("_BarraDocente")
+
+<h1>Editar Sugerencias para la práctica</h1>
+
+<form asp-controller="Docentes" asp-action="sugerencias" method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="PracticaID" />
+    <div class="form-group">
+        <label asp-for="Progreso" class="control-label"></label>
+        <input asp-for="Progreso" class="form-control" />
+        <span asp-validation-for="Progreso" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Sugerencias" class="control-label"></label>
+        <textarea asp-for="Sugerencias" class="form-control"></textarea>
+        <span asp-validation-for="Sugerencias" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-4">
+        <input type="submit" value="Guardar" class="btn btn-primary" />
+        <a asp-action="Asesorias" class="btn btn-danger"> <i class="fa-solid fa-x"></i> Cancelar</a>
+    </div>
+</form>
+
+@if (ViewBag.Errores != null)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewBag.Errores)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

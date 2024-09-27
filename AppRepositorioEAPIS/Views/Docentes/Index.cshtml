@@ -1,0 +1,63 @@
+﻿@model AppRepositorioEAPIS.ViewModels.IndexViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+@Html.Partial("_BarraDocente")
+
+<h1>Prácticas Pre Profesionales</h1>
+<a class="text-light btn btn-dark mt-4" asp-area="" asp-controller="Docentes" asp-action="asesorias"> <i class="fa-solid fa-address-book"></i>Mis Asesorias</a>
+
+<table class="table table-bordered table-hover table-striped mt-4">
+    <thead class="bg-primary text-white">
+        <tr>
+            <th>Nombre</th>
+            <th>Estudiante</th>
+            <th>Docente</th>
+            <th>Especialidad</th>
+            <th>Empresa</th>
+            <th>Estado</th>
+            <th>Progreso</th>
+            <th>
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Practicas)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>@item.estudiante.Nombres</td>
+                <td>@item.docente.Nombres</td>
+                <td>@item.Especialidad</td>
+                <td>@item.empresa.Nombre</td>
+                <td>@item.Estado</td>
+                <td>
+                    <div class="progress" style="height: 10px;">
+                        <div class="progress-bar" role="progressbar" style="width:@item.Progreso%;background-color:@(item.Progreso == 100 ? "green" : item.Progreso > 50 ? "blue" : "red");" aria-valuenow="@item.Progreso" aria-valuemin="0" aria-valuemax="100">
+                            @item.Progreso%
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.PracticaID" class="btn btn-info btn-sm">
+                        <i class="fa-solid fa-circle-info"></i>&nbsp;Detalles
+                    </a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.TotalRegistros; i++)
+        {
+            <li class="page-item @(i == Model.PaginaActual ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-pagina="@i">@i</a>
+            </li>
+        }
+    </ul>
+</nav>

@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<style>
+    #canvas_body {
+        background: linear-gradient(180deg, #3b5998 0%, #000000 100%);
+        height: 100vh;
+        color: white;
+    }
+
+    .btn-close {
+        background-color: transparent;
+        border: 2px solid white;
+        border-radius: 20%;
+        padding: 5px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nav-menu {
+        background-color: #3b5998
+    }
+
+    .btn-close::before {
+        content: '\00d7';
+        font-size: 20px;
+        color: white;
+    }
+
+    .btn-close:hover {
+        background-color: white;
+        color: #003366;
+        border-color: #003366;
+    }
+</style>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+    <div class="offcanvas-header nav-menu">
+        <h5 class="offcanvas-title" id="sidebarLabel">Menú de Docente</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body" id="canvas_body">
+        <div class="mt-4 mb-4">
+            <a class="text-light btn btn-success" asp-area="" asp-controller="Docentes" asp-action="Index">
+                <i class="fa-solid fa-book"></i>&nbsp;Prácticas
+            </a>
+        </div>
+        <div class="mt-4 mb-4">
+            <a class="text-light btn btn-dark" asp-area="" asp-controller="Docentes" asp-action="asesorias">
+                <i class="fa-solid fa-address-book"></i>Mis Asesorias
+            </a>
+        </div>
+        <div class="mt-4 mb-4">
+            <form asp-action="CerrarSesion" method="post">
+                <button type="submit" class="btn btn-danger"> <i class="fa-solid fa-right-from-bracket"></i>&nbsp; Cerrar Sesión</button>
+            </form>
+        </div>
+
+    </div>
+</div>

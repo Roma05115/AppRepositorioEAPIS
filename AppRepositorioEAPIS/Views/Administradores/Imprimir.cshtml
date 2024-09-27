@@ -1,0 +1,114 @@
+﻿@model IEnumerable<AppRepositorioEAPIS.Models.Practica>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    //Lista del servicio
+    var listaimprimir = ViewData["ListaImprmir"] as List<Practica>;
+}
+
+@Html.Partial("_BarraAdministrador")
+
+<h1>Imprimir Prácticas</h1>
+<div class="container">
+    <div class="row">
+        <!-- Tabla de prácticas -->
+        <div class="col-md-6">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped mt-4">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                            <th>@Html.DisplayNameFor(model => model.estudiante)</th>
+                            <th>@Html.DisplayNameFor(model => model.Progreso)</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in Model)
+                            {
+                                var existeEnListaImprimir = listaimprimir.Any(p => p.PracticaID == item.PracticaID);//bol
+                                //si existe alguna practica con el mismo id de la otra tabla, esta ya no se va a mostrar
+                                if (!existeEnListaImprimir)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.estudiante.Nombres)</td>
+                                        <td>
+                                            <div class="progress" style="height: 10px;">
+                                                <div class="progress-bar" role="progressbar" style="width:@item.Progreso%;background-color:@(item.Progreso == 100 ? "green" : item.Progreso > 50 ? "blue" : "red");" aria-valuenow="@item.Progreso" aria-valuemin="0" aria-valuemax="100">
+                                                    @item.Progreso%
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <form asp-action="AgregarPractica" asp-controller="Administradores" method="post">
+                                                <input type="hidden" name="id" value="@item.PracticaID" />
+                                                <button type="submit" class="btn btn-success">
+                                                    <i class="fa-solid fa-plus"></i>&nbsp;Agregar Imprimir
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tabla de prácticas para imprimir -->
+        <div class="col-md-6">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped mt-4">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                            <th>@Html.DisplayNameFor(model => model.estudiante)</th>
+                            <th>@Html.DisplayNameFor(model => model.docente)</th>
+                            <th>@Html.DisplayNameFor(model => model.empresa)</th>
+                            <th>@Html.DisplayNameFor(model => model.Progreso)</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in listaimprimir)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.estudiante.Nombres)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.docente.Nombres)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.empresa.Nombre)</td>
+                                    <td>
+                                        <div class="progress" style="height: 10px;">
+                                            <div class="progress-bar" role="progressbar" style="width:@item.Progreso%;background-color:@(item.Progreso == 100 ? "green" : item.Progreso > 50 ? "blue" : "red");" aria-valuenow="@item.Progreso" aria-valuemin="0" aria-valuemax="100">
+                                                @item.Progreso%
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <form asp-action="EliminarPractica" asp-controller="Administradores" method="post">
+                                            <input type="hidden" name="id" value="@item.PracticaID" />
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa-solid fa-trash"></i>&nbsp;Eliminar
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-action="ImprimirPracticas" class="btn btn-warning">
+            <i class="fa-solid fa-print"></i>&nbsp;Imprimir
+        </a>
+    </div>
+</div>

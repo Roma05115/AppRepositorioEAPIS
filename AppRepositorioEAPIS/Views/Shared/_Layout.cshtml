@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<style>
+    #principal_nav_bar {
+        background: linear-gradient(135deg, #002366, #3b5998);
+        color: white; 
+    }
+</style>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AppRepositorioEAPIS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="~/AppRepositorioEAPIS.styles.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.0/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3" id="principal_nav_bar">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/ESCUDO_UNC.png" width="45px" height="60px">&nbsp; AcademicoMax.UNC
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                       
+                    </ul>
+                </div>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                    <!-- Boton de barra desplegable -->
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-custom text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+   <footer class="border-top footer">
+        <div class="container">
+            <ul class="nav justify-content-end">
+                <span>&copy; @DateTime.Now.Year - AppRepositorioEAPIS</span>
+                <li class="ms-3"><a class="text-body-secondary" target="_blank" href="https://www.instagram.com/unc1.962/"><i class="fab fa-instagram"></i></a></li>
+                <li class="ms-3"><a class="text-body-secondary" target="_blank" href="https://www.facebook.com/unc.edu.pe?locale=es_LA"><i class="fab fa-facebook"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,61 @@
+﻿<AppRepositorioEAPIS.Models.Practica>
+
+    @{
+        ViewData["Title"] = "Mis Practicas";
+    }
+
+    @Html.Partial("_BarraEstudiante")
+
+    <h1>Prácticas Asesoradas</h1>
+
+    
+    @if (ViewData["Mensaje"] != null)
+    {
+        <div class="alert alert-info">
+            @ViewData["Mensaje"]
+        </div>
+    }
+
+    <a asp-controller="Estudiantes"
+       asp-action="ImprimirPracticas"
+       asp-route-estudianteId="@ViewBag.EstudianteID"
+       class="btn btn-info text-white mt-4 mb-4"><i class="fa-solid fa-print"></i>&nbsp; Imprimir Prácticas</a>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead class="bg-primary text-white">
+            <tr>
+                <th>Nombre</th>
+                <th>Estudiante</th>
+                <th>Especialidad</th>
+                <th>Empresa</th>
+                <th>Estado</th>
+                <th>Progreso</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Nombre</td>
+                    <td>@item.estudiante.Nombres</td>
+                    <td>@item.Especialidad</td>
+                    <td>@item.empresa.Nombre</td>
+                    <td>@item.Estado</td>
+                    <td>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar" role="progressbar" style="width:@item.Progreso%;background-color:@(item.Progreso == 100 ? "green" : item.Progreso > 50 ? "blue" : "red");" aria-valuenow="@item.Progreso" aria-valuemin="0" aria-valuemax="100">
+                                @item.Progreso%
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.PracticaID" class="btn btn-info btn-sm">
+                            <i class="fa-solid fa-circle-info"></i>&nbsp;Detalles
+                        </a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

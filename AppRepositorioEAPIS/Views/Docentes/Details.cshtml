@@ -1,0 +1,94 @@
+﻿@model AppRepositorioEAPIS.Models.Practica
+@{
+    ViewData["Title"] = "Details";
+}
+
+@Html.Partial("_BarraDocente")
+<h1>Detalles de la Práctica</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Especialidad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Especialidad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NroResolucion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NroResolucion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaAprobacion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FechaAprobacion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Progreso)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Progreso)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sugerencias)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sugerencias)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.estudiante)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.estudiante.Nombres)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.docente)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.docente.Nombres )
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.empresa)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.empresa.Nombre)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-primary"><i class="fa-solid fa-rotate-left"></i>&nbsp;Volver</a>
+</div>

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<AppRepositorioEAPIS.Models.Practica>
+
+@{
+    ViewData["Title"] = "Asesorias";
+}
+
+@Html.Partial("_BarraDocente")
+<h1>Mis Asesorías</h1>
+
+<table class="table table-bordered table-hover table-striped mt-4">
+    <thead class="bg-primary text-white">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estudiante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.docente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Especialidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.empresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Progreso)
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estudiante.Nombres)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.docente.Nombres)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Especialidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.empresa.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    <div class="progress" style="height: 10px;">
+                        <div class="progress-bar" role="progressbar" style="width:@item.Progreso%;background-color:@(item.Progreso == 100 ? "green" : item.Progreso > 50 ? "blue" : "red");" aria-valuenow="@item.Progreso" aria-valuemin="0" aria-valuemax="100">
+                            @item.Progreso%
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.PracticaID" class="btn btn-info btn-sm">
+                        <i class="fa-solid fa-circle-info"></i>&nbsp;Detalles
+                    </a>
+                    <a asp-action="Sugerencias" asp-route-id="@item.PracticaID" class="btn btn-info btn-sm">
+                        <i class="fa-solid fa-circle-info"></i>&nbsp;Sugerencias
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
